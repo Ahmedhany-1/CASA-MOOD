@@ -1,5 +1,7 @@
 /// <reference path="../../lib/three.d.ts" />
 /// <reference path="../core/utils.ts" />
+/// <reference path="hud.ts" />
+/// <reference path="floorplan.ts" />
 
 module BP3D.Three {
 

@@ -1,12 +1,12 @@
 /// <reference path="../../lib/three.d.ts" />
 /// <reference path="../core/events.ts" />
 /// <reference path="../model/model.ts" />
-/// <reference path="floorPlan.ts" />
+/// <reference path="floorplan.ts" />
 /// <reference path="lights.ts" />
 /// <reference path="skybox.ts" />
 /// <reference path="controls.ts" />
-/// <reference path="controller.ts" />
 /// <reference path="hud.ts" />
+/// <reference path="controller.ts" />
 
 module BP3D.Three {
 
@@ -86,7 +86,7 @@ module BP3D.Three {
       this.renderer.autoClear = false;
       (this.renderer as any).shadowMapEnabled = true;
       (this.renderer as any).shadowMapSoft = true;
-      this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      (this.renderer as any).shadowMapType = THREE.PCFSoftShadowMap;
 
       var skybox = new Skybox(this.scene);
 

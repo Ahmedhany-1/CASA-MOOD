@@ -174,8 +174,8 @@ module BP3D.Floorplanner {
       this.rawMouseX = event.clientX;
       this.rawMouseY = event.clientY;
 
-      this.mouseX = (event.clientX - this.canvasElement.offset().left) * this.cmPerPixel + this.originX * this.cmPerPixel;
-      this.mouseY = (event.clientY - this.canvasElement.offset().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
+      this.mouseX = (event.clientX - this.canvasElement.getBoundingClientRect().left) * this.cmPerPixel + this.originX * this.cmPerPixel;
+      this.mouseY = (event.clientY - this.canvasElement.getBoundingClientRect().top) * this.cmPerPixel + this.originY * this.cmPerPixel;
 
       // update target (snapped position of actual mouse)
       if (this.mode == floorplannerModes.DRAW || (this.mode == floorplannerModes.MOVE && this.mouseDown)) {
@@ -278,8 +278,8 @@ module BP3D.Floorplanner {
 
     /** Sets the origin so that floorplan is centered */
     private resetOrigin() {
-      var centerX = this.canvasElement.innerWidth() / 2.0;
-      var centerY = this.canvasElement.innerHeight() / 2.0;
+      var centerX = this.canvasElement.clientWidth / 2.0;
+      var centerY = this.canvasElement.clientHeight / 2.0;
       var centerFloorplan = this.floorplan.getCenter();
       this.originX = centerFloorplan.x * this.pixelsPerCm - centerX;
       this.originY = centerFloorplan.z * this.pixelsPerCm - centerY;
