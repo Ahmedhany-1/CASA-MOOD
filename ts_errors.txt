@@ -1,0 +1,180 @@
+﻿Initializing
+Command-line options: --verbose, --gruntfile=C:\Users\ahmed\Desktop\GP\GP Demo\Gruntfile.js
+
+Reading "Gruntfile.js" Gruntfile...OK
+
+Registering Gruntfile tasks.
+
+Registering "grunt-contrib-clean" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-clean\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-clean\package.json...OK
+Loading "clean.js" tasks...OK
++ clean
+
+Registering "grunt-contrib-concat" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-concat\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-concat\package.json...OK
+Loading "concat.js" tasks...OK
++ concat
+
+Registering "grunt-contrib-copy" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-copy\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-copy\package.json...OK
+Loading "copy.js" tasks...OK
++ copy
+
+Registering "grunt-contrib-uglify" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-uglify\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-contrib-uglify\package.json...OK
+Loading "uglify.js" tasks...OK
++ uglify
+
+Registering "grunt-string-replace" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-string-replace\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-string-replace\package.json...OK
+Loading "string-replace.js" tasks...OK
++ string-replace
+
+Registering "grunt-subgrunt" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-subgrunt\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-subgrunt\package.json...OK
+Loading "subgrunt.js" tasks...OK
++ subgrunt
+
+Registering "grunt-typedoc" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-typedoc\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-typedoc\package.json...OK
+Loading "typedoc.js" tasks...OK
++ typedoc
+
+Registering "grunt-typescript" local Npm module tasks.
+Reading C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-typescript\package.json...OK
+Parsing C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\grunt-typescript\package.json...OK
+Loading "index.js" tasks...OK
++ typescript
+Initializing config...OK
+Loading "Gruntfile.js" tasks...OK
++ debug, default, example, release
+
+Running tasks: typescript
+
+Running "typescript" task
+
+Running "typescript:blueprint3d" (typescript) task
+Verifying property typescript.blueprint3d exists in config...OK
+Files: src/blueprint3d.ts, src/core/configuration.ts, src/core/dimensioning.ts, src/core/events.ts, src/core/log.ts, src/core/utils.ts, src/core/version.ts, src/floorplanner/floorplanner_view.ts, src/floorplanner/floorplanner.ts, src/items/factory.ts, src/items/floor_item.ts, src/items/in_wall_floor_item.ts, src/items/in_wall_item.ts, src/items/item.ts, src/items/metadata.ts, src/items/on_floor_item.ts, src/items/wall_floor_item.ts, src/items/wall_item.ts, src/model/corner.ts, src/model/floorplan.ts, src/model/half_edge.ts, src/model/model.ts, src/model/room.ts, src/model/scene.ts, src/model/wall.ts, src/three/controller.ts, src/three/controls.ts, src/three/edge.ts, src/three/floor.ts, src/three/floorplan.ts, src/three/hud.ts, src/three/lights.ts, src/three/main.ts, src/three/skybox.ts -> dist/blueprint3d.js
+Options: target="es5", declaration, sourceMap, removeComments=false
+--option [7ms]
+{
+  "dest": "dist/blueprint3d.js",
+  "singleFile": true,
+  "generateTsConfig": false,
+  "tsOptions": {
+    "removeComments": false,
+    "sourceMap": true,
+    "declaration": true,
+    "out": "dist/blueprint3d.js",
+    "target": 1,
+    "module": 0,
+    "noEmitOnError": true
+  }
+} [7ms]
+- write tsconfig.json [10ms]
+- create program [10ms]
+--host.getSourceFile: src/blueprint3d.ts [13ms]
+  readed [26ms]
+--host.getSourceFile: src/model/model.ts [26ms]
+  readed [32ms]
+--host.getSourceFile: lib/three.d.ts [32ms]
+  readed [85ms]
+--host.getSourceFile: src/core/events.ts [86ms]
+  readed [90ms]
+--host.getSourceFile: src/model/floorplan.ts [90ms]
+  readed [102ms]
+--host.getSourceFile: src/core/utils.ts [103ms]
+  readed [111ms]
+--host.getSourceFile: src/model/wall.ts [112ms]
+  readed [114ms]
+--host.getSourceFile: src/core/configuration.ts [115ms]
+  readed [117ms]
+--host.getSourceFile: src/core/dimensioning.ts [118ms]
+  readed [119ms]
+--host.getSourceFile: src/items/item.ts [120ms]
+  readed [124ms]
+--host.getSourceFile: src/items/metadata.ts [124ms]
+  readed [125ms]
+--host.getSourceFile: src/model/corner.ts [126ms]
+  readed [129ms]
+--host.getSourceFile: src/model/half_edge.ts [129ms]
+  readed [133ms]
+--host.getSourceFile: src/model/room.ts [133ms]
+  readed [134ms]
+--host.getSourceFile: src/model/scene.ts [135ms]
+  readed [136ms]
+--host.getSourceFile: src/items/factory.ts [136ms]
+  readed [137ms]
+--host.getSourceFile: src/items/floor_item.ts [137ms]
+  readed [138ms]
+--host.getSourceFile: src/items/in_wall_floor_item.ts [139ms]
+  readed [140ms]
+--host.getSourceFile: src/items/in_wall_item.ts [140ms]
+  readed [141ms]
+--host.getSourceFile: src/items/wall_item.ts [141ms]
+  readed [144ms]
+--host.getSourceFile: src/items/on_floor_item.ts [144ms]
+  readed [146ms]
+--host.getSourceFile: src/items/wall_floor_item.ts [146ms]
+  readed [147ms]
+--host.getSourceFile: src/floorplanner/floorplanner.ts [147ms]
+  readed [150ms]
+--host.getSourceFile: src/floorplanner/floorplanner_view.ts [150ms]
+  readed [154ms]
+--host.getSourceFile: src/three/main.ts [154ms]
+  readed [158ms]
+--host.getSourceFile: src/three/floorPlan.ts [158ms]
+  readed [160ms]
+--host.getSourceFile: src/three/floor.ts [160ms]
+  readed [161ms]
+--host.getSourceFile: src/three/edge.ts [161ms]
+  readed [166ms]
+--host.getSourceFile: src/three/lights.ts [166ms]
+  readed [168ms]
+--host.getSourceFile: src/three/skybox.ts [168ms]
+  readed [170ms]
+--host.getSourceFile: src/three/controls.ts [170ms]
+  readed [176ms]
+--host.getSourceFile: src/three/controller.ts [177ms]
+  readed [181ms]
+--host.getSourceFile: src/three/hud.ts [181ms]
+  readed [183ms]
+--host.getSourceFile: src/core/log.ts [183ms]
+  readed [185ms]
+--host.getSourceFile: src/core/version.ts [185ms]
+  readed [186ms]
+bin dir = C:\Users\ahmed\Desktop\GP\GP Demo\node_modules\typescript\lib [187ms]
+--host.getSourceFile: C:/Users/ahmed/Desktop/GP/GP Demo/node_modules/typescript/lib/lib.d.ts [187ms]
+  readed [270ms]
+>> src/floorplanner/floorplanner.ts(42,34): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/corner.ts(22,31): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/corner.ts(25,33): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/corner.ts(28,32): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/floorplan.ts(28,34): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/floorplan.ts(31,36): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/scene.ts(28,35): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/scene.ts(31,36): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/wall.ts(58,33): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/model/wall.ts(61,32): error TS2346: Supplied parameters do not match any signature of call target.
+>> src/three/controller.ts(25,18): error TS2304: Cannot find name 'HUD'.
+>> src/three/controller.ts(39,130): error TS2304: Cannot find name 'HUD'.
+>> src/three/controller.ts(61,7): error TS2341: Property 'itemRemovedCallbacks' is private and only accessible within class 'Scene'.
+>> src/three/controller.ts(62,7): error TS2341: Property 'itemLoadedCallbacks' is private and only accessible within class 'Scene'.
+>> src/three/controller.ts(77,12): error TS2445: Property 'position_set' is protected and only accessible within class 'Item' and its subclasses.
+>> src/three/controller.ts(85,7): error TS2445: Property 'position_set' is protected and only accessible within class 'Item' and its subclasses.
+>> src/three/controller.ts(128,27): error TS2341: Property 'floorPlanes' is private and only accessible within class 'Floorplan'.
+>> src/three/controls.ts(97,79): error TS2352: Neither type 'MouseWheelEvent' nor type 'WheelEvent' is assignable to the other.
+>>   Property 'deltaMode' is missing in type 'MouseWheelEvent'.
+>> src/three/main.ts(46,24): error TS2304: Cannot find name 'Floorplan'.
+>> src/three/main.ts(47,18): error TS2304: Cannot find name 'HUD'.
+Warning: Task "typescript:blueprint3d" failed. Use --force to continue.
+
+Aborted due to warnings.

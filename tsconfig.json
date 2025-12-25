@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "none",
+        "noImplicitAny": false,
+        "removeComments": false,
+        "sourceMap": true,
+        "declaration": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "lib/**/*.d.ts"
+    ]
+}
