@@ -1,225 +1,441 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Blueprint 3D - Example</title>
+<html lang="en">
 
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/example.css" rel="stylesheet">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASA MOOD - Interior Design Studio</title>
+  <meta name="description" content="Professional 3D interior design tool for Egyptian furniture market">
 
-    <script src="js/three.min.js"></script>
-    <script src="js/blueprint3d.js"></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#059669',
+            'primary-dark': '#047857',
+          }
+        }
+      }
+    }
+  </script>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.js"></script>
-    
-    <script src="js/items.js"></script>
-    <script src="js/example.js"></script>
-  </head>
+  <!-- Custom Styles -->
+  <link href="css/example.css" rel="stylesheet">
 
-  <body>
+  <!-- Scripts -->
+  <script src="js/three.min.js?v=1.0.2"></script>
+  <script src="js/blueprint3d.js?v=1.0.2"></script>
+  <script src="js/jquery.js?v=1.0.2"></script>
+  <script src="js/items.js?v=1.0.2"></script>
+  <script src="js/example.js?v=1.0.2"></script>
+</head>
 
-    <div class="container-fluid">
-      <div class="row main-row">
-        <!-- Left Column -->
-        <div class="col-xs-3 sidebar">
-          <!-- Main Navigation -->
-          <ul class="nav nav-sidebar">
-            <li id="floorplan_tab"><a href="#">
-              Edit Floorplan
-              <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-            </a></li>
-            <li id="design_tab"><a href="#">
-              Design
-              <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-            </a></li>
-            <li id="items_tab"><a href="#">
-              Add Items
-              <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-            </a></li>
-          </ul>
-          <hr />
+<body class="bg-gray-100 overflow-hidden h-screen">
 
-          <!-- Context Menu -->
-          <div id="context-menu">
-            <div style="margin: 0 20px">
-              <span id="context-menu-name" class="lead"></span>
-              <br /><br />
-              <button class="btn btn-block btn-danger" id="context-menu-delete">
-                <span class="glyphicon glyphicon-trash"></span> 
-                Delete Item
-              </button>
-            <br />
-            <div class="panel panel-default">
-              <div class="panel-heading">Adjust Size</div>
-              <div class="panel-body" style="color: #333333">
-
-                <div class="form form-horizontal" class="lead">
-                  <div class="form-group">
-                    <label class="col-sm-5 control-label">
-                       Width
-                    </label>
-                    <div class="col-sm-6">
-                      <input type="number" class="form-control" id="item-width">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-5 control-label">
-                      Depth 
-                    </label>
-                    <div class="col-sm-6">
-                      <input type="number" class="form-control" id="item-depth">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-sm-5 control-label">
-                      Height
-                    </label>
-                    <div class="col-sm-6">
-                      <input type="number" class="form-control" id="item-height">
-                    </div>
-                  </div>
-                </div>
-                <small><span class="text-muted">Measurements in inches.</span></small>
-              </div>
-            </div>
-
-            <label><input type="checkbox" id="fixed" /> Lock in place</label>
-            <br /><br />
-            </div>
-          </div>
-
-          <!-- Floor textures -->
-          <div id="floorTexturesDiv" style="display:none; padding: 0 20px">
-            <div class="panel panel-default">
-              <div class="panel-heading">Adjust Floor</div>
-              <div class="panel-body" style="color: #333333">
-
-                <div class="col-sm-6" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="rooms/textures/light_fine_wood.jpg" texture-stretch="false" texture-scale="300">
-                    <img alt="Thumbnail light fine wood" src="rooms/thumbnails/thumbnail_light_fine_wood.jpg" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Wall Textures -->
-          <div id="wallTextures" style="display:none; padding: 0 20px">
-            <div class="panel panel-default">
-              <div class="panel-heading">Adjust Wall</div>
-              <div class="panel-body" style="color: #333333">
-                <div class="col-sm-6" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="rooms/textures/marbletiles.jpg" texture-stretch="false" texture-scale="300">
-                    <img alt="Thumbnail marbletiles" src="rooms/thumbnails/thumbnail_marbletiles.jpg" />
-                  </a>
-                </div>
-                <div class="col-sm-6" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="rooms/textures/wallmap_yellow.png" texture-stretch="true" texture-scale="">
-                    <img alt="Thumbnail wallmap yellow" src="rooms/thumbnails/thumbnail_wallmap_yellow.png" />
-                  </a>
-                </div>
-                <div class="col-sm-6" style="padding: 3px">
-                  <a href="#" class="thumbnail texture-select-thumbnail" texture-url="rooms/textures/light_brick.jpg" texture-stretch="false" texture-scale="100">
-                    <img alt="Thumbnail light brick" src="rooms/thumbnails/thumbnail_light_brick.jpg" />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- ========== TOP HEADER (Fixed 60px) ========== -->
+  <header id="app-header"
+    class="fixed top-0 left-0 right-0 h-[60px] bg-white border-b border-gray-200 z-50 flex items-center justify-between px-6">
+    <!-- Left: Logo & Project Name -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
         </div>
-
-        <!-- Right Column -->
-        <div class="col-xs-9 main">
-
-          <!-- 3D Viewer -->
-          <div id="viewer">
-
-            <div id="main-controls">
-              <a href="#" class="btn btn-default btn-sm" id="new">
-                New Plan
-              </a>
-              <a href="#" class="btn btn-default btn-sm" id="saveFile">
-                Save Plan
-              </a>
-              <a class="btn btn-sm btn-default btn-file">
-               <input type="file" class="hidden-input" id="loadFile">
-               Load Plan
-              </a>
-            </div>
-
-            <div id="camera-controls">
-              <a href="#" class="btn btn-default bottom" id="zoom-out">
-                <span class="glyphicon glyphicon-zoom-out"></span>
-              </a>
-              <a href="#" class="btn btn-default bottom" id="reset-view">
-                <span class="glyphicon glyphicon glyphicon-home"></span>
-              </a>
-              <a href="#" class="btn btn-default bottom" id="zoom-in">
-                <span class="glyphicon glyphicon-zoom-in"></span>
-              </a>
-              
-              <span>&nbsp;</span>
-
-              <a class="btn btn-default bottom" href="#" id="move-left" >
-                <span class="glyphicon glyphicon-arrow-left"></span>
-              </a>
-              <span class="btn-group-vertical">
-                <a class="btn btn-default" href="#" id="move-up">
-                  <span class="glyphicon glyphicon-arrow-up"></span>
-                </a>
-                <a class="btn btn-default" href="#" id="move-down">
-                  <span class="glyphicon glyphicon-arrow-down"></span>
-                </a>
-              </span>
-              <a class="btn btn-default bottom" href="#" id="move-right" >
-                <span class="glyphicon glyphicon-arrow-right"></span>
-              </a>
-            </div>
-
-            <div id="loading-modal">
-              <h1>Loading...</h1>  
-            </div>
-          </div>
-
-          <!-- 2D Floorplanner -->
-          <div id="floorplanner">
-            <canvas id="floorplanner-canvas"></canvas>
-            <div id="floorplanner-controls">
-
-              <button id="move" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-move"></span>
-                Move Walls
-              </button>
-              <button id="draw" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-pencil"></span>
-                Draw Walls
-              </button>
-              <button id="delete" class="btn btn-sm btn-default">
-                <span class="glyphicon glyphicon-remove"></span>
-                Delete Walls
-              </button>
-              <span class="pull-right">
-                <button class="btn btn-primary btn-sm" id="update-floorplan">Done &raquo;</button>
-              </span>
-
-            </div>
-            <div id="draw-walls-hint">
-              Press the "Esc" key to stop drawing walls
-            </div>
-          </div>
-
-          <!-- Add Items -->
-          <div id="add-items">
-            <div class="row" id="items-wrapper">
-
-              <!-- Items added here by items.js -->
-            </div>
-          </div>
-      
-        </div>
-        <!-- End Right Column -->
+        <span class="text-xl font-bold text-gray-800">CASA MOOD</span>
+      </div>
+      <div class="h-6 w-px bg-gray-300"></div>
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-gray-500">Project:</span>
+        <span class="text-sm font-medium text-gray-700">New Apartment - Cairo</span>
       </div>
     </div>
 
-  </body>
+    <!-- Right: Budget & Actions -->
+    <div class="flex items-center gap-4">
+      <!-- Budget Tracker -->
+      <div id="budget-tracker" class="flex items-center gap-2 bg-gray-50 px-4 py-2 rounded-lg border border-gray-200">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="text-sm text-gray-600">Total Estimate:</span>
+        <span id="total-budget" class="text-sm font-semibold text-emerald-600">0.00 EGP</span>
+      </div>
+
+      <!-- Load Project Button (Ghost) -->
+      <button id="load-project"
+        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+        </svg>
+        Load
+      </button>
+
+      <!-- Export PDF Button (Ghost) -->
+      <button id="export-pdf"
+        class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        PDF
+      </button>
+
+      <!-- Save Project Button (Solid Emerald) -->
+      <button id="save-project"
+        class="px-4 py-2 text-sm font-medium text-white bg-emerald-600 rounded-lg hover:bg-emerald-700 transition-colors flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+        </svg>
+        Save
+      </button>
+    </div>
+  </header>
+
+  <!-- ========== MAIN LAYOUT ========== -->
+  <div id="app-container" class="flex pt-[60px] h-screen">
+
+    <!-- ========== LEFT SIDEBAR (Product Catalog - 300px) ========== -->
+    <aside id="left-sidebar"
+      class="w-[300px] min-w-[300px] bg-gray-50 border-r border-gray-200 flex flex-col overflow-hidden">
+
+      <!-- Search Bar -->
+      <div class="p-4 border-b border-gray-200">
+        <div class="relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input type="text" id="product-search" placeholder="Search Egyptian Brands..."
+            class="w-full pl-10 pr-4 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent" />
+        </div>
+      </div>
+
+      <!-- Category Pills -->
+      <div class="p-4 border-b border-gray-200">
+        <div id="category-pills" class="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <button
+            class="category-pill active px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap bg-emerald-600 text-white"
+            data-category="all">All</button>
+          <button
+            class="category-pill px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap bg-white text-gray-600 border border-gray-300 hover:border-emerald-500 hover:text-emerald-600 transition-colors"
+            data-category="living">Living</button>
+          <button
+            class="category-pill px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap bg-white text-gray-600 border border-gray-300 hover:border-emerald-500 hover:text-emerald-600 transition-colors"
+            data-category="bedroom">Bedroom</button>
+          <button
+            class="category-pill px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap bg-white text-gray-600 border border-gray-300 hover:border-emerald-500 hover:text-emerald-600 transition-colors"
+            data-category="kitchen">Kitchen</button>
+          <button
+            class="category-pill px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap bg-white text-gray-600 border border-gray-300 hover:border-emerald-500 hover:text-emerald-600 transition-colors"
+            data-category="damietta">Damietta Classic</button>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div id="product-catalog" class="flex-1 overflow-y-auto p-4">
+        <div id="items-wrapper" class="grid grid-cols-2 gap-3">
+          <!-- Products injected by items.js -->
+        </div>
+      </div>
+
+      <!-- Mode Tabs (Bottom) -->
+      <div class="border-t border-gray-200 bg-white">
+        <nav class="flex">
+          <button id="floorplan_tab"
+            class="flex-1 py-3 text-xs font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-50 border-r border-gray-200 transition-colors flex flex-col items-center gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+            Floorplan
+          </button>
+          <button id="design_tab"
+            class="flex-1 py-3 text-xs font-medium text-gray-600 hover:text-emerald-600 hover:bg-gray-50 border-r border-gray-200 transition-colors flex flex-col items-center gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+            </svg>
+            3D View
+          </button>
+          <button id="items_tab"
+            class="flex-1 py-3 text-xs font-medium text-emerald-600 bg-emerald-50 transition-colors flex flex-col items-center gap-1">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+            Catalog
+          </button>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- ========== MAIN VIEWPORT ========== -->
+    <main id="main-viewport" class="flex-1 relative bg-gray-200 overflow-hidden">
+
+      <!-- 3D Viewer -->
+      <div id="viewer" class="absolute inset-0">
+        <!-- Three.js will dynamically create and append its canvas here -->
+
+        <!-- Camera Presets (Floating) -->
+        <div id="camera-presets" class="absolute top-4 right-4 flex flex-col gap-2 z-10">
+          <button id="view-perspective"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600"
+            title="Perspective View">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5" />
+            </svg>
+          </button>
+          <button id="view-top"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600"
+            title="Top View">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </button>
+          <button id="view-front"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600"
+            title="Front View">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6z" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Zoom Controls -->
+        <div id="camera-controls" class="absolute bottom-4 right-4 flex items-center gap-2 z-10">
+          <button id="zoom-out"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+            </svg>
+          </button>
+          <button id="reset-view"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+          </button>
+          <button id="zoom-in"
+            class="w-10 h-10 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow flex items-center justify-center text-gray-600 hover:text-emerald-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Loading Modal -->
+        <div id="loading-modal" class="absolute inset-0 bg-gray-900/80 flex items-center justify-center z-20">
+          <div class="text-center">
+            <div
+              class="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4">
+            </div>
+            <p class="text-white text-lg font-medium">Loading...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2D Floorplanner -->
+      <div id="floorplanner" class="absolute inset-0 bg-white">
+        <canvas id="floorplanner-canvas"></canvas>
+        <div id="floorplanner-controls" class="absolute top-4 left-4 flex items-center gap-2 z-10">
+          <button id="move"
+            class="floorplan-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+            Move Walls
+          </button>
+          <button id="draw"
+            class="floorplan-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+            </svg>
+            Draw Walls
+          </button>
+          <button id="delete"
+            class="floorplan-btn px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Delete
+          </button>
+          <button id="update-floorplan"
+            class="px-4 py-2 text-sm font-medium bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+            Done →
+          </button>
+        </div>
+        <div id="draw-walls-hint"
+          class="absolute left-4 bottom-4 bg-gray-900/75 text-white px-3 py-2 rounded-lg text-sm hidden">
+          Press "Esc" to stop drawing walls
+        </div>
+      </div>
+
+      <!-- Add Items View (Hidden - Using Sidebar Catalog) -->
+      <div id="add-items" class="hidden"></div>
+    </main>
+
+    <!-- ========== RIGHT SIDEBAR (Properties Panel - Slide-out) ========== -->
+    <aside id="right-sidebar"
+      class="w-[320px] min-w-[320px] bg-white border-l border-gray-200 transform translate-x-full transition-transform duration-300 ease-in-out fixed top-[60px] right-0 bottom-0 z-40 overflow-y-auto">
+
+      <!-- Panel Header -->
+      <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="font-semibold text-gray-800">Properties</h2>
+        <button id="close-properties"
+          class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-gray-700 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Item Context Menu -->
+      <div id="context-menu" class="p-4 hidden">
+        <div class="mb-4">
+          <span id="context-menu-name" class="text-lg font-semibold text-gray-800"></span>
+        </div>
+
+        <!-- Position -->
+        <div class="mb-6">
+          <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Position</h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">X Position</label>
+              <input type="number" id="item-pos-x"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="0">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Y Position</label>
+              <input type="number" id="item-pos-y"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="0">
+            </div>
+          </div>
+        </div>
+
+        <!-- Rotation -->
+        <div class="mb-6">
+          <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Rotation</h3>
+          <div class="flex items-center gap-3">
+            <input type="range" id="item-rotation" min="0" max="360" value="0" class="flex-1 accent-emerald-600">
+            <span id="rotation-value" class="text-sm text-gray-600 w-12">0°</span>
+          </div>
+        </div>
+
+        <!-- Dimensions -->
+        <div class="mb-6">
+          <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Dimensions (cm)</h3>
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Width</label>
+              <input type="number" id="item-width"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Depth</label>
+              <input type="number" id="item-depth"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Height</label>
+              <input type="number" id="item-height"
+                class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Material -->
+        <div class="mb-6">
+          <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Material</h3>
+          <div class="flex gap-2">
+            <button
+              class="material-btn flex-1 py-2 text-xs font-medium bg-amber-100 text-amber-800 rounded-lg hover:bg-amber-200 transition-colors"
+              data-material="wood">Wood</button>
+            <button
+              class="material-btn flex-1 py-2 text-xs font-medium bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 transition-colors"
+              data-material="fabric">Fabric</button>
+            <button
+              class="material-btn flex-1 py-2 text-xs font-medium bg-slate-200 text-slate-800 rounded-lg hover:bg-slate-300 transition-colors"
+              data-material="metal">Metal</button>
+          </div>
+        </div>
+
+        <!-- Lock & Delete -->
+        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+          <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+            <input type="checkbox" id="fixed" class="w-4 h-4 accent-emerald-600 rounded">
+            Lock in place
+          </label>
+          <button id="context-menu-delete"
+            class="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <!-- Floor Textures -->
+      <div id="floorTexturesDiv" class="p-4 hidden">
+        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Floor Texture</h3>
+        <div class="grid grid-cols-3 gap-2">
+          <a href="#"
+            class="texture-select-thumbnail block rounded-lg overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-colors"
+            texture-url="rooms/textures/light_fine_wood.jpg" texture-stretch="false" texture-scale="300">
+            <img alt="Light Fine Wood" src="rooms/thumbnails/thumbnail_light_fine_wood.jpg"
+              class="w-full h-16 object-cover" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Wall Textures -->
+      <div id="wallTextures" class="p-4 hidden">
+        <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Wall Texture</h3>
+        <div class="grid grid-cols-3 gap-2">
+          <a href="#"
+            class="texture-select-thumbnail block rounded-lg overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-colors"
+            texture-url="rooms/textures/marbletiles.jpg" texture-stretch="false" texture-scale="300">
+            <img alt="Marble Tiles" src="rooms/thumbnails/thumbnail_marbletiles.jpg" class="w-full h-16 object-cover" />
+          </a>
+          <a href="#"
+            class="texture-select-thumbnail block rounded-lg overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-colors"
+            texture-url="rooms/textures/wallmap_yellow.png" texture-stretch="true" texture-scale="">
+            <img alt="Yellow Wallmap" src="rooms/thumbnails/thumbnail_wallmap_yellow.png"
+              class="w-full h-16 object-cover" />
+          </a>
+          <a href="#"
+            class="texture-select-thumbnail block rounded-lg overflow-hidden border-2 border-transparent hover:border-emerald-500 transition-colors"
+            texture-url="rooms/textures/light_brick.jpg" texture-stretch="false" texture-scale="100">
+            <img alt="Light Brick" src="rooms/thumbnails/thumbnail_light_brick.jpg" class="w-full h-16 object-cover" />
+          </a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+</body>
+
 </html>

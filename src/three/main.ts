@@ -227,6 +227,18 @@ module BP3D.Three {
         this.elementHeight = this.element.clientHeight;
       }
 
+      console.log("Main.updateWindowSize: ", {
+        rect: rect,
+        scrollY: window.scrollY,
+        innerHeight: window.innerHeight,
+        heightMargin: this.heightMargin,
+        elementWidth: this.elementWidth,
+        elementHeight: this.elementHeight
+      });
+
+      if (this.elementWidth < 0) this.elementWidth = 0;
+      if (this.elementHeight < 0) this.elementHeight = 0;
+
       this.camera.aspect = this.elementWidth / this.elementHeight;
       this.camera.updateProjectionMatrix();
 

@@ -17,6 +17,8 @@ module BP3D.Three {
     floorplan.fireOnUpdatedRooms(redraw);
 
     function redraw() {
+      console.log("Floorplan.redraw: redrawing floors and edges");
+      console.log("Rooms count: ", scope.floorplan.getRooms().length);
       // clear scene
       scope.floors.forEach((floor) => {
         floor.removeFromScene();
@@ -29,7 +31,7 @@ module BP3D.Three {
       scope.edges = [];
 
       // draw floors
-     scope.floorplan.getRooms().forEach((room) => {
+      scope.floorplan.getRooms().forEach((room) => {
         var threeFloor = new Three.Floor(scene, room);
         scope.floors.push(threeFloor);
         threeFloor.addToScene();
@@ -41,6 +43,7 @@ module BP3D.Three {
           scene, edge, scope.controls);
         scope.edges.push(threeEdge);
       });
+      console.log("Floorplan.redraw: finished", { floors: scope.floors.length, edges: scope.edges.length });
     }
   }
 }
